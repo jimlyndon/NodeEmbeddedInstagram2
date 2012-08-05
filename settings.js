@@ -18,7 +18,7 @@ app.use (function(req, res, next) {
 
 exports.app = app;
 
-exports.appPort = process.env.IG_APP_PORT || process.env.PORT ||3000;
+exports.appPort = process.env.IG_APP_PORT || process.env.PORT || 3000;
 exports.CLIENT_ID = process.env.IG_CLIENT_ID || '211543125f05499e9717f9abd1db9530'
 exports.CLIENT_SECRET = process.env.IG_CLIENT_SECRET || 'f62e138f53394121b181458da6ec9982';
 exports.httpClient = (process.env.IG_USE_INSECURE ? require('http') : require('https'));

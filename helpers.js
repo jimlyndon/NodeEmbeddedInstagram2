@@ -3,8 +3,9 @@ var settings = require('./settings');
 var crypto = require('crypto');
 
 
-var rtg   = require("url").parse(settings.REDISTOGO_URL);
+var rtg = require("url").parse(settings.REDISTOGO_URL);
 var redisClient = redis.createClient(rtg.port, rtg.hostname);
+redisClient.auth(rtg.auth.split(":")[1]);
 //var redisClient = redis.createClient(settings.REDIS_PORT, settings.REDIS_HOST);
 
 function isValidRequest(request) {
