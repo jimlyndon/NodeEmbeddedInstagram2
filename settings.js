@@ -27,7 +27,7 @@ exports.apiPort = process.env.IG_API_PORT || null;
 exports.basePath = process.env.IG_BASE_PATH || '';
 exports.REDIS_PORT = 9923; // for local - 6486;
 exports.REDIS_HOST = '127.0.0.1';
-exports.REDISTOGO_URL = process.env.REDISTOGO_URL || 'redis://redistogo:ca6083acab19483dee822258867ee4b2@tetra.redistogo.com:9923/';
+exports.REDISTOGO_URL = process.env.REDISTOGO_URL || 'redis://redistogo:6f47379c13a75a923c3c6e04df6b6631@tetra.redistogo.com:9927/';
 exports.debug = true;
 
 app.set('view engine', 'jade');
