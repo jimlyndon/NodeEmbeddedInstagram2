@@ -18,14 +18,14 @@ app.use (function(req, res, next) {
 
 exports.app = app;
 
-exports.appPort = process.env.IG_APP_PORT || 3000;
-exports.CLIENT_ID = process.env.IG_CLIENT_ID || 'CLIENT_ID'
-exports.CLIENT_SECRET = process.env.IG_CLIENT_SECRET || 'CLIENT_SECRET';
+exports.appPort = process.env.IG_APP_PORT || process.env.PORT ||3000;
+exports.CLIENT_ID = process.env.IG_CLIENT_ID || '211543125f05499e9717f9abd1db9530'
+exports.CLIENT_SECRET = process.env.IG_CLIENT_SECRET || 'f62e138f53394121b181458da6ec9982';
 exports.httpClient = (process.env.IG_USE_INSECURE ? require('http') : require('https'));
 exports.apiHost = process.env.IG_API_HOST || 'api.instagram.com';
 exports.apiPort = process.env.IG_API_PORT || null;
 exports.basePath = process.env.IG_BASE_PATH || '';
-exports.REDIS_PORT = 9923; // for local - 6486;
+exports.REDIS_PORT = 9927; // for local - 6486;
 exports.REDIS_HOST = '127.0.0.1';
 exports.REDISTOGO_URL = process.env.REDISTOGO_URL || 'redis://redistogo:6f47379c13a75a923c3c6e04df6b6631@tetra.redistogo.com:9927/';
 exports.debug = true;
