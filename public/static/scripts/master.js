@@ -1,5 +1,5 @@
-//var socket = new io.Socket();
-var socket = io.connect(window.location.hostname);
+var socket = new io.Socket();
+//var socket = io.connect(window.location.hostname);
 
 socket.on('message', function(update){ 
   var data = $.parseJSON(update);
