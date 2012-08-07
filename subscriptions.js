@@ -1,25 +1,20 @@
 var redis = require('redis'),
     fs = require('fs'),
     jade = require('jade'),
-    io = require('socket.io');
-    
-
-
-    // Heroku won't actually allow us to use WebSockets
-    // so we have to setup polling instead.
-    // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
-    io.configure(function () {
-      io.set("transports", ["xhr-polling"]);
-      io.set("polling duration", 10);
-    });
-    
-    
-    var settings = require('./settings'),
+    io = require('socket.io'),
+    settings = require('./settings'),
     helpers = require('./helpers'),
     app = settings.app,
     subscriptionPattern = 'channel:*',
     socket = io.listen(app);
-    
+
+    // Heroku won't actually allow us to use WebSockets
+    // so we have to setup polling instead.
+    // https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
+    socket.configure(function () {
+      socket.set("transports", ["xhr-polling"]);
+      socket.set("polling duration", 10);
+    });
     
 // We use Redis's pattern subscribe command to listen for signals
 // notifying us of new updates.
