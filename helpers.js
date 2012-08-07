@@ -13,7 +13,7 @@ function isValidRequest(request) {
     // coming from a trusted source. We use the client secret as the key
     // to the HMAC.
     var hmac = crypto.createHmac('sha1', settings.CLIENT_SECRET);
-    debug("request: " + request.rawBody);
+    //debug("request: " + request.rawBody);
     hmac.update(request.rawBody);
     var providedSignature = request.headers['x-hub-signature'];
     var calculatedSignature = hmac.digest(encoding='hex');
@@ -63,7 +63,7 @@ function processGeography(geoName, update){
 
         // Asynchronously ask the Instagram API for new media for a given
         // geography.
-    debug("processGeography: getting " + path);
+    //debug("processGeography: getting " + path);
     settings.httpClient.get(options, function(response){
       var data = '';
       response.on('data', function(chunk){
@@ -87,7 +87,7 @@ function processGeography(geoName, update){
         
         // Let all the redis listeners know that we've got new media.
         redisClient.publish('channel:' + geoName, data);
-        debug("Published: " + data);
+        //debug("Published: " + data);
       });
     });
   });
