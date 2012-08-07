@@ -21,7 +21,7 @@ app.get('/callbacks/geo/:geoName', function(request, response){
 });
 
 app.post('/callbacks/geo/:geoName', function(request, response){
-  //helpers.debug("PUT /callbacks/geo/");
+    helpers.debug("PUT /callbacks/geo/");
   //helpers.debug("PUT /callbacks/geo/" + request.params.geoName);
    // The POST callback for Instagram to call every time there's an update
    // to one of our subscriptions.
