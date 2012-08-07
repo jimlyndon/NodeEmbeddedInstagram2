@@ -31,18 +31,18 @@ app.post('/callbacks/geo/:geoName', function(request, response){
    //   response.send('FAIL');
    //   return;
    // }
-   //  
-   //  // Go through and process each update. Note that every update doesn't
-   //  // include the updated data - we use the data in the update to query
-   //  // the Instagram API to get the data we want.
-   // ar updates = request.body;
-   // ar geoName = request.params.geoName;
-   // or(index in updates){
-   //  var update = updates[index];
-   //  if(update['object'] == "geography")
-   //    helpers.processGeography(geoName, update);
-   // 
-   // helpers.debug("Processed " + updates.length + " updates");
+    
+    // Go through and process each update. Note that every update doesn't
+    // include the updated data - we use the data in the update to query
+    // the Instagram API to get the data we want.
+   var updates = request.body;
+   var geoName = request.params.geoName;
+   for(index in updates){
+    var update = updates[index];
+    if(update['object'] == "geography")
+      helpers.processGeography(geoName, update);
+   }
+   helpers.debug("Processed " + updates.length + " updates");
   response.send('OK');
 });
 
