@@ -16,10 +16,6 @@ var redis = require('redis'),
       socket.set("polling duration", 10);
     });
     
-    socket.on('connect', function() {
-        console.log('connected client ');
-    });
-    
 // We use Redis's pattern subscribe command to listen for signals
 // notifying us of new updates.
 var rtg   = require("url").parse(settings.REDISTOGO_URL);
