@@ -20,7 +20,7 @@ var redis = require('redis'),
     //     console.log('connected client ');
     // });
     
-    socket.sockets.on('connection', function (socket) {
+    socket.sockets.on('connect', function (socket) {
       // socket.on('ferret', function (name, fn) {
       //   fn('woot');
       // });
