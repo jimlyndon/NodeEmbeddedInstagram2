@@ -1,12 +1,12 @@
 //var socket = new io.Socket();
 var socket = io.connect(window.location.hostname);
 
-socket.on('connect', function () {
-    socket.on('message', function(update){ 
-      var data = $.parseJSON(update);
-      $(document).trigger(data);
-    });
-});
+// socket.on('connect', function () {
+//     socket.on('message', function(update){ 
+//       var data = $.parseJSON(update);
+//       $(document).trigger(data);
+//     });
+// });
 
 
 
