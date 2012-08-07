@@ -21,28 +21,28 @@ app.get('/callbacks/geo/:geoName', function(request, response){
 });
 
 app.post('/callbacks/geo/:geoName', function(request, response){
-  helpers.debug("PUT /callbacks/geo/");
+  //helpers.debug("PUT /callbacks/geo/");
   //helpers.debug("PUT /callbacks/geo/" + request.params.geoName);
    // The POST callback for Instagram to call every time there's an update
    // to one of our subscriptions.
     
    // First, let's verify the payload's integrity
-   if(!helpers.isValidRequest(request)) {
-     response.send('FAIL');
-     return;
-   }
-    
-    // Go through and process each update. Note that every update doesn't
-    // include the updated data - we use the data in the update to query
-    // the Instagram API to get the data we want.
-  var updates = request.body;
-  var geoName = request.params.geoName;
-  for(index in updates){
-    var update = updates[index];
-    if(update['object'] == "geography")
-      helpers.processGeography(geoName, update);
-  }
-  helpers.debug("Processed " + updates.length + " updates");
+   // if(!helpers.isValidRequest(request)) {
+   //   response.send('FAIL');
+   //   return;
+   // }
+   //  
+   //  // Go through and process each update. Note that every update doesn't
+   //  // include the updated data - we use the data in the update to query
+   //  // the Instagram API to get the data we want.
+   // ar updates = request.body;
+   // ar geoName = request.params.geoName;
+   // or(index in updates){
+   //  var update = updates[index];
+   //  if(update['object'] == "geography")
+   //    helpers.processGeography(geoName, update);
+   // 
+   // elpers.debug("Processed " + updates.length + " updates");
   response.send('OK');
 });
 
