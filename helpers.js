@@ -75,6 +75,9 @@ function processGeography(geoName, update){
       response.on('end', function(){
         debug("Got end.");
           try {
+            console.log('start data');
+                    console.log(data);
+            console.log('end data');
             var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
