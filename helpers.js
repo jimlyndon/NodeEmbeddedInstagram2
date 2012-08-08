@@ -60,7 +60,7 @@ function processGeography(geoName, update){
     if(settings.apiPort){
         options['port'] = settings.apiPort;
     }
-
+console.log(JSON.stringify(options));
         // Asynchronously ask the Instagram API for new media for a given
         // geography.
     //debug("processGeography: getting " + path);
@@ -68,8 +68,8 @@ function processGeography(geoName, update){
       var data = '';
       response.on('data', function(chunk){
         debug("Got data...");
-        //console.log(chunk);
-        //JSON.stringify(media)
+        //console.log(JSON.stringify(options));
+        //JSON.stringify(options)
         data += chunk;
       });
       response.on('end', function(){
