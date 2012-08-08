@@ -101,6 +101,67 @@ console.log('end data');
 }
 exports.processGeography = processGeography;
 
+
+function processTag(geoName, update){
+  var path = '/v1/tags/' + update.object_id + '/media/recent/';
+  getMinID(geoName, function(error, minID){
+    var queryString = "?client_id="+ settings.CLIENT_ID;
+    if(minID){
+      queryString += '&min_id=' + minID;
+    } else {
+        // If this is the first update, just grab the most recent.
+      queryString += '&count=1';
+    }
+    var options = {
+      host: settings.apiHost,
+      // Note that in all implementations, basePath will be ''. Here at
+      // instagram, this aint true ;)
+      path: settings.basePath + path + queryString
+    };
+    if(settings.apiPort){
+        options['port'] = settings.apiPort;
+    }
+console.log(JSON.stringify(options));
+        // Asynchronously ask the Instagram API for new media for a given
+        // geography.
+    //debug("processGeography: getting " + path);
+    settings.httpClient.get(options, function(response){
+      var data = '';
+      response.on('data', function(chunk){
+        debug("Got data...");
+        //console.log(JSON.stringify(options));
+        //JSON.stringify(options)
+        data += chunk;
+      });
+      response.on('end', function(){
+        debug("Got end.");
+          try {
+            console.log('start data');
+                    console.log(data);
+            console.log('end data');
+            var parsedResponse = JSON.parse(data);
+          } catch (e) {
+              console.log('Couldn\'t parse data. Malformed?');
+              return;
+          }
+        if(!parsedResponse || !parsedResponse['data']){
+            console.log('Did not receive data for ' + geoName +':');
+            console.log(data);
+            return;
+        }
+        setMinID(geoName, parsedResponse['data']);
+        console.log('start data');
+        console.log(data);
+console.log('end data');
+        // Let all the redis listeners know that we've got new media.
+        redisClient.publish('channel:' + geoName, data);
+        //debug("Published: " + data);
+      });
+    });
+  });
+}
+exports.processTag = processTag;
+
 function getMedia(callback){
     // This function gets the most recent media stored in redis
   redisClient.lrange('media:objects', 0, 14, function(error, media){

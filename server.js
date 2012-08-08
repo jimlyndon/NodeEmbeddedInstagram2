@@ -39,8 +39,10 @@ helpers.debug("PUT /callbacks/geo/body " + JSON.stringify(request.body));
    var geoName = request.params.geoName;
    for(index in updates){
     var update = updates[index];
-    //if(update['object'] == "geography")
+    if(update['object'] == "geography")
       helpers.processGeography(geoName, update);
+    else
+      helpers.processTag(geoName, update);
    }
    helpers.debug("Processed " + updates.length + " updates");
   response.send('OK');
