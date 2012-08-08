@@ -68,7 +68,7 @@ function processGeography(geoName, update){
       var data = '';
       response.on('data', function(chunk){
         debug("Got data...");
-        console.log(chunk);
+        //console.log(chunk);
         //JSON.stringify(media)
         data += chunk;
       });
@@ -86,7 +86,9 @@ function processGeography(geoName, update){
             return;
         }
         setMinID(geoName, parsedResponse['data']);
-        
+        console.log('start data');
+        console.log(data);
+console.log('end data');
         // Let all the redis listeners know that we've got new media.
         redisClient.publish('channel:' + geoName, data);
         //debug("Published: " + data);
