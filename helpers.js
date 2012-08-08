@@ -68,6 +68,8 @@ function processGeography(geoName, update){
       var data = '';
       response.on('data', function(chunk){
         debug("Got data...");
+        console.log(chunk);
+        //JSON.stringify(media)
         data += chunk;
       });
       response.on('end', function(){
