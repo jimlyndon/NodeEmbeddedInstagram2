@@ -141,9 +141,9 @@ function processTag(geoName, update){
             // newData.tags = parsedResponse.tags;
             // //newData.caption = parsedResponse.caption;
             // newData.created_time = parsedResponse.created_time;
-            // newData.images = {};
-            // newData.images.standard_resolution = parsedResponse.images.standard_resolution;
-            // newData.id = parsedResponse.id;
+            newData.images = {};
+            newData.images.standard_resolution = parsedResponse.images.standard_resolution;
+            newData.id = parsedResponse.id;
        
             //var parsedResponse = JSON.parse(data);
           } catch (e) {
