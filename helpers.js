@@ -157,6 +157,8 @@ function processTag(geoName, update){
         //     return;
         // }
         
+        console.log('data is ' + JSON.stringify(newData));
+        
         setMinID(geoName, newData);
 
         // Let all the redis listeners know that we've got new media.
