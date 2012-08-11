@@ -60,7 +60,7 @@ function processGeography(geoName, update){
     if(settings.apiPort){
         options['port'] = settings.apiPort;
     }
-console.log(JSON.stringify(options));
+    console.log(JSON.stringify(options));
         // Asynchronously ask the Instagram API for new media for a given
         // geography.
     //debug("processGeography: getting " + path);
@@ -75,9 +75,14 @@ console.log(JSON.stringify(options));
       response.on('end', function(){
         debug("Got end.");
           try {
-            console.log('start data');
-                    console.log(data);
-            console.log('end data');
+            var fullParsedResponse = JSON.parse(data).data;
+            var tags = fullParsedResponse.tags;
+            var caption = fullParsedResponse.caption;
+            var created_time = fullParsedResponse.created_time;
+            var images = {};
+            images.standard_resolution = fullParsedResponse.images.standard_resolution;
+            var id = fullParsedResponse.id
+            
             var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
@@ -136,9 +141,7 @@ console.log(JSON.stringify(options));
       response.on('end', function(){
         debug("Got end.");
           try {
-            console.log('start data');
-                    console.log(data);
-            console.log('end data');
+var parsedResponse = JSON.parse(data);
             var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
