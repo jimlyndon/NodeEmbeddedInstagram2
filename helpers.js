@@ -124,6 +124,7 @@ function processTag(geoName, update){
         // geography.
     settings.httpClient.get(options, function(response){
       var data = '';
+      var newData = {};
       
       response.on('data', function(chunk){
         debug("Got data...");
@@ -136,8 +137,7 @@ function processTag(geoName, update){
         debug("Got end.");
           try {
             var parsedResponse = JSON.parse(data).data;
-            console.log(parsedResponse);
-            var newData = {};            
+            console.log(parsedResponse);  
             // newData.tags = parsedResponse.tags;
             // //newData.caption = parsedResponse.caption;
             // newData.created_time = parsedResponse.created_time;
