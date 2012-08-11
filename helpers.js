@@ -143,7 +143,7 @@ function processTag(geoName, update){
             // newData.images = {};
             // newData.images.standard_resolution = parsedResponse.images.standard_resolution;
             // newData.id = parsedResponse.id;
-
+          console.log(Object.prototype.toString.call(parsedResponse));
             //var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
