@@ -124,7 +124,7 @@ function processTag(geoName, update){
         // geography.
     settings.httpClient.get(options, function(response){
       var data = '';
-      var newData = {};
+      var newData = '';
       
       response.on('data', function(chunk){
         debug("Got data...");
