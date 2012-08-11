@@ -72,7 +72,9 @@ pubSubClient.on('pmessage', function(pattern, channel, message){
       'channelName': channelName
     };
     for(sessionId in socket.clients){
-      socket.clients[sessionId].send(JSON.stringify(update));
+      var update = JSON.stringify(update);
+      console.log(update);
+      socket.clients[sessionId].send(update);
     }
   }
 });
