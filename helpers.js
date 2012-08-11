@@ -136,14 +136,15 @@ function processTag(geoName, update){
       response.on('end', function(){
         debug("Got end.");
           try {
-            var parsedResponse = JSON.parse(data).data;
+            var parsedResponse = JSON.parse(data);
             //newData.tags = parsedResponse.tags;
             //newData.caption = parsedResponse.caption;
             //newData.created_time = parsedResponse.created_time;
             // newData.images = {};
             // newData.images.standard_resolution = parsedResponse.images.standard_resolution;
             // newData.id = parsedResponse.id;
-          console.log(Object.prototype.toString.call(parsedResponse));
+          console.log("data is type: " + Object.prototype.toString.call(data));
+          console.log("parsedResponse is type: " + Object.prototype.toString.call(parsedResponse));
             //var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
