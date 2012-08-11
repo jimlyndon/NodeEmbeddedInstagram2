@@ -22,7 +22,6 @@ app.get('/callbacks/geo/:geoName', function(request, response){
 
 app.post('/callbacks/geo/:geoName', function(request, response){
   helpers.debug("PUT /callbacks/geo/" + request.params.geoName);
-helpers.debug("PUT /callbacks/geo/body " + JSON.stringify(request.body));
    // The POST callback for Instagram to call every time there's an update
    // to one of our subscriptions.
     
@@ -39,9 +38,9 @@ helpers.debug("PUT /callbacks/geo/body " + JSON.stringify(request.body));
    var geoName = request.params.geoName;
    for(index in updates){
     var update = updates[index];
-    if(update['object'] == "geography")
-      helpers.processGeography(geoName, update);
-    else
+    // if(update['object'] == "geography")
+    //   helpers.processGeography(geoName, update);
+    // else
       helpers.processTag(geoName, update);
    }
    helpers.debug("Processed " + updates.length + " updates");
