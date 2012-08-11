@@ -124,7 +124,7 @@ function processTag(geoName, update){
         // geography.
     settings.httpClient.get(options, function(response){
       var data = '';
-      var newData = '';
+      var newData = {};
       
       response.on('data', function(chunk){
         debug("Got data...");
@@ -137,12 +137,12 @@ function processTag(geoName, update){
         debug("Got end.");
           try {
             var parsedResponse = JSON.parse(data).data;
-            console.log(parsedResponse);  
-            // newData.tags = parsedResponse.tags;
-            // //newData.caption = parsedResponse.caption;
-            // newData.created_time = parsedResponse.created_time;
-            // newData.images = {};
-            // newData.images.standard_resolution = parsedResponse.images.standard_resolution;
+            //console.log(parsedResponse);  
+            newData.tags = parsedResponse.tags;
+            //newData.caption = parsedResponse.caption;
+            newData.created_time = parsedResponse.created_time;
+            newData.images = {};
+            newData.images.standard_resolution = parsedResponse.images.standard_resolution;
             newData.id = parsedResponse.id;
        
             //var parsedResponse = JSON.parse(data);
@@ -156,13 +156,13 @@ function processTag(geoName, update){
         //     //console.log(data);
         //     return;
         // }
+        var newDataStr = JSON.stringify(newData);
+        console.log('data is ' + newDataStr);
         
-        console.log('data is ' + JSON.stringify(newData));
-        
-        setMinID(geoName, newData);
+        setMinID(geoName, newDataStr);
 
         // Let all the redis listeners know that we've got new media.
-        redisClient.publish('channel:' + geoName, newData);
+        redisClient.publish('channel:' + geoName, newDataStr);
         //debug("Published: " + data);
       });
     });
