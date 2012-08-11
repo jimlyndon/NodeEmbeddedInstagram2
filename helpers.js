@@ -136,6 +136,7 @@ function processTag(geoName, update){
         debug("Got end.");
           try {
             var parsedResponse = JSON.parse(data).data;
+            console.log(parsedResponse);
             var newData = {};            
             // newData.tags = parsedResponse.tags;
             // //newData.caption = parsedResponse.caption;
@@ -150,11 +151,11 @@ function processTag(geoName, update){
               return;
           }
           
-        if(!parsedResponse || !parsedResponse['data']){
-            console.log('Did not receive data for ' + geoName +':');
-            //console.log(data);
-            return;
-        }
+        // if(!parsedResponse || !parsedResponse['data']){
+        //     console.log('Did not receive data for ' + geoName +':');
+        //     //console.log(data);
+        //     return;
+        // }
         
         setMinID(geoName, newData);
 
