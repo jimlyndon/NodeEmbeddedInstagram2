@@ -137,14 +137,13 @@ function processTag(geoName, update){
         debug("Got end.");
           try {
             var parsedResponse = JSON.parse(data).data;
-            //console.log(parsedResponse);  
-            newData.tags = parsedResponse.tags;
+            //newData.tags = parsedResponse.tags;
             //newData.caption = parsedResponse.caption;
-            newData.created_time = parsedResponse.created_time;
+            //newData.created_time = parsedResponse.created_time;
             newData.images = {};
             newData.images.standard_resolution = parsedResponse.images.standard_resolution;
             newData.id = parsedResponse.id;
-       
+
             //var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
