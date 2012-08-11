@@ -1,7 +1,7 @@
 var redis = require('redis');
 var settings = require('./settings');
 var crypto = require('crypto');
-
+var _ = require('underscore');
 
 var rtg = require("url").parse(settings.REDISTOGO_URL);
 var redisClient = redis.createClient(rtg.port, rtg.hostname);
@@ -125,6 +125,7 @@ function processTag(geoName, update){
     settings.httpClient.get(options, function(response){
       var data = '';
       var newData = {};
+      var newDataStr = '';
       
       response.on('data', function(chunk){
         debug("Got data...");
@@ -136,15 +137,29 @@ function processTag(geoName, update){
       response.on('end', function(){
         debug("Got end.");
           try {
-            var parsedResponse = JSON.parse(data);
+            //var parsedResponse = JSON.parse(data);
+            
+            var dataArray = JSON.parse(data).data;
+            var newDataArray = [];
+            _.each(dataArray, function(obj, idx){
+                var images = {};
+                images.standard_resolution = obj.images.standard_resolution;
+                newDataArray.push({tags : obj.tags, id : obj.id, images : images });
+            });
+            newData = { "data": newDataArray };
+            newDataStr = JSON.stringify(newData);
+            //console.log(newDataStr);
+            
+            
+            
             //newData.tags = parsedResponse.tags;
             //newData.caption = parsedResponse.caption;
             //newData.created_time = parsedResponse.created_time;
             // newData.images = {};
             // newData.images.standard_resolution = parsedResponse.images.standard_resolution;
             // newData.id = parsedResponse.id;
-          console.log("data is type: " + Object.prototype.toString.call(data));
-          console.log("parsedResponse is type: " + Object.prototype.toString.call(parsedResponse));
+          //console.log("data is type: " + Object.prototype.toString.call(data));
+          //console.log("parsedResponse is type: " + Object.prototype.toString.call(parsedResponse));
             //var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
@@ -156,10 +171,8 @@ function processTag(geoName, update){
         //     //console.log(data);
         //     return;
         // }
-        var newDataStr = JSON.stringify(newData);
-        console.log('data is ' + newDataStr);
         
-        setMinID(geoName, newDataStr);
+        setMinID(geoName, newData.data);
 
         // Let all the redis listeners know that we've got new media.
         redisClient.publish('channel:' + geoName, newDataStr);
