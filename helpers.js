@@ -75,14 +75,6 @@ function processGeography(geoName, update){
       response.on('end', function(){
         debug("Got end.");
           try {
-            var fullParsedResponse = JSON.parse(data).data;
-            var tags = fullParsedResponse.tags;
-            var caption = fullParsedResponse.caption;
-            var created_time = fullParsedResponse.created_time;
-            var images = {};
-            images.standard_resolution = fullParsedResponse.images.standard_resolution;
-            var id = fullParsedResponse.id
-            
             var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
@@ -109,6 +101,7 @@ exports.processGeography = processGeography;
 
 function processTag(geoName, update){
   var path = '/v1/tags/' + update.object_id + '/media/recent/';
+  
   getMinID(geoName, function(error, minID){
     var queryString = "?client_id="+ settings.CLIENT_ID;
     if(minID){
@@ -126,38 +119,47 @@ function processTag(geoName, update){
     if(settings.apiPort){
         options['port'] = settings.apiPort;
     }
-console.log(JSON.stringify(options));
+
         // Asynchronously ask the Instagram API for new media for a given
         // geography.
-    //debug("processGeography: getting " + path);
     settings.httpClient.get(options, function(response){
       var data = '';
+      
       response.on('data', function(chunk){
         debug("Got data...");
         //console.log(JSON.stringify(options));
         //JSON.stringify(options)
         data += chunk;
       });
+      
       response.on('end', function(){
         debug("Got end.");
           try {
-var parsedResponse = JSON.parse(data);
-            var parsedResponse = JSON.parse(data);
+            var parsedResponse = JSON.parse(data).data;
+            var newData = {};            
+            newData.tags = parsedResponse.tags;
+            //newData.caption = parsedResponse.caption;
+            newData.created_time = parsedResponse.created_time;
+            newData.images = {};
+            newData.images.standard_resolution = parsedResponse.images.standard_resolution;
+            newData.id = parsedResponse.id;
+       
+            //var parsedResponse = JSON.parse(data);
           } catch (e) {
               console.log('Couldn\'t parse data. Malformed?');
               return;
           }
+          
         if(!parsedResponse || !parsedResponse['data']){
             console.log('Did not receive data for ' + geoName +':');
-            console.log(data);
+            //console.log(data);
             return;
         }
-        setMinID(geoName, parsedResponse['data']);
-        console.log('start data');
-        console.log(data);
-console.log('end data');
+        
+        setMinID(geoName, newData);
+
         // Let all the redis listeners know that we've got new media.
-        redisClient.publish('channel:' + geoName, data);
+        redisClient.publish('channel:' + geoName, newData);
         //debug("Published: " + data);
       });
     });
