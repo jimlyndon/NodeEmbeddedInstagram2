@@ -37,7 +37,7 @@ var Media = {
         });
     },
     positionAll: function(){
-        var columns = 5;
+        var columns = 1;
         var width = parseInt($('.container').css('width'));
       $('.container').each(function(index, item){
         $(item).css('top', 10+parseInt(index / columns) * width +'px')
