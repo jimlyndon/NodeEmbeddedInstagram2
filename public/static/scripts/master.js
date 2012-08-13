@@ -18,7 +18,7 @@ var Media = {
             var index = Math.floor(Math.random() * numChildren);
             var $container = $($('#wrapper').children()[index]);
             var $oldCube = $('.cube', $container);
-                if ($.browser.webkit){
+            if ($.browser.webkit){
                 $newCube = $('<div class="cube in"><span class="location"></span><span class="channel"></span</div>');
                 $newCube.prepend(this);
                 $('.location', $newCube).html(media.location.name);
