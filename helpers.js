@@ -144,6 +144,12 @@ function processTag(geoName, update){
             _.each(dataArray, function(obj, idx){
                 var images = {};
                 images.standard_resolution = obj.images.standard_resolution;
+                var cap = {}
+                if(!!obj.caption)
+                  cap = obj.caption;
+                else
+                  cap.text = '';
+                  
                 newDataArray.push({id : obj.id, images : images, caption : obj.caption });
             });
             newData = { "data": newDataArray };
