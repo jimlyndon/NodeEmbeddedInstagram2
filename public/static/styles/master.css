@@ -73,7 +73,7 @@ a:hover {
 #wrapper {
 	margin:0px auto 00px auto;
 	padding:10px 20px 40px 90px;
-	text-align:center;
+	text-align:center!important;
 	width:1010px;	
 }
 
