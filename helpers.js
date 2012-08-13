@@ -144,7 +144,7 @@ function processTag(geoName, update){
             _.each(dataArray, function(obj, idx){
                 var images = {};
                 images.standard_resolution = obj.images.standard_resolution;
-                newDataArray.push({id : obj.id, images : images });
+                newDataArray.push({id : obj.id, images : images, caption : obj.caption });
             });
             newData = { "data": newDataArray };
             newDataStr = JSON.stringify(newData);
