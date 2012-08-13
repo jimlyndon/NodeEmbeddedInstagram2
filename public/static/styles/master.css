@@ -70,62 +70,35 @@ a:hover {
 	position: relative; */
 } */
 
-#wrapper{
-
-margin:0px auto 00px auto;
-padding:10px 20px 40px 90px;
-text-align:center;
-width:1010px;
-	
+#wrapper {
+	margin:0px auto 00px auto;
+	padding:10px 20px 40px 90px;
+	text-align:center;
+	width:1010px;	
 }
 
-.listimg{
-
+.listimg {
 	margin:45px auto 10px auto; 
 	width:500px;
 	 box-shadow: 0px 3px 12px #999; 
 	 -moz-box-shadow: 0px 3px 12px #999; 
 	 -webkit-box-shadow: 0px 3px 12px #ACB5C4;
 	 -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;
+}
 
-	}
-
-	.listimg:first-child{
-		margin:15px auto 10px auto; 
-		}
+.listimg:first-child{
+	margin:15px auto 10px auto; 
+}
 
 
 .caption{
-
 	width:500px;
 	height:40px;
-   margin:0px auto 00px auto;
+	margin:0px auto 00px auto;
 	text-align:right;	 
 	font-size:12px; color:#444; font-weight:normal; line-height:12px;
 	text-shadow:1px 1px 1px #efefef;
-
-	}
-
-.caption{
-
-	width:500px;
-	height:40px;
-   margin:0px auto 00px auto;
-	text-align:right;	 
-	font-size:12px; color:#444; font-weight:normal; line-height:12px;
-	text-shadow:1px 1px 1px #efefef;
-
-	}
-
-	.instagramicon{
-
-	position:relative;
-	top:2px;
-	z-index:2;
-
-		}
-
-
+}
 
 .cube {
 	width: 200px;
