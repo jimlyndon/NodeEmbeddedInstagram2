@@ -1,0 +1,5 @@
+h1 Instagram demo feed
+div#wrapper
+  div(data-bind="template: { name: 'instagram-template', foreach: instagrams.reverse() }")
+  //- remove comments to use jade partial
+  //- != partial('partials/image', images)
