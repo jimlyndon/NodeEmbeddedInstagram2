@@ -11,16 +11,15 @@ Steps for running the EmbeddedInstagram2 application:
 
 3. install redis on your machine (if it isn't already): sudo npm install redis -g
 
-4. run redis using the configuration from the application:
+4. run redis using the configuration from the application (this simply runs redid on non standard port 6486, though you could run it from any port, just make sure you update the configuration in the settings.js file in your project.):
 conf/redis.conf
-
-this simply runs redid on non standard port 6486, though you could run it from any port, just make sure you update the configuration in the settings.js file in your project.
 
 5. Since redis is running you will need to open a second terminal and navigate to the application's directory. Once there, run node: node server.js
 
 6. By the way, Procfile is just a file that tells Heroku how to start your application, just so you know.  It's not used otherwise.
 
 7. Once the application is running you can set up subscriptions (see below).
+
 
 
 Steps to set up a single subscription against Instagram's subscription API for tags:
