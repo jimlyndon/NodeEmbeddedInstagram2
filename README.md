@@ -4,9 +4,13 @@ NodeEmbeddedInstagram
 Node Embedded Instagram example
 
 Steps for running the EmbeddedInstagram2 application:
+
 1. git clone repo
+
 2. open terminal and run 'npm install' within the project's directory
+
 3. install redis on your machine (if it isn't already): sudo npm install redis -g
+
 4. run redis using the configuration from the application:
 conf/redis.conf
 
