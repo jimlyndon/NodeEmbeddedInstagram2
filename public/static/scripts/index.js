@@ -2,7 +2,7 @@
 var viewModel = {
     instagrams : ko.observableArray([]),
     tweets : ko.observableArray([]),
-    endAnimation : function(model, evt){
+    endAnimation : function(model, evt) {
         $(evt.currentTarget).parent().removeClass('animating');
     }
 };

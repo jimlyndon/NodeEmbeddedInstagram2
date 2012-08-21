@@ -34,7 +34,7 @@ exports.isValidRequest = isValidRequest;
 
 // This function gets the most recent media stored in redis
 function getMedia(callback){
-  redisClient.lrange('media:objects', 0, 20, function(error, media){
+  redisClient.lrange('media:objects', 0, 9, function(error, media){
       // debug("getMedia: got " + media.length + " items");
       // Parse each media JSON to send to callback
       media = media.map(function(json){return JSON.parse(json);});
@@ -101,11 +101,11 @@ function processInstagramUpdate(update) {
                 else
                   cap.text = '';
                   
-                newDataArray.push({id : obj.id, images : images, caption : cap });
+                console.log(obj.id);
+                newDataArray.push({id : obj.id, images : images, caption : cap, created_time : obj.created_time });
             });
             newData = { "data": newDataArray };
-            newDataStr = JSON.stringify(newData);
-            console.log(newDataStr);
+            newDataStr = JSON.stringify(newData);            
             
           } catch (e) {
               // console.log('Couldn\'t parse data. Malformed?');
@@ -169,9 +169,9 @@ exports.debug = debug;
 
 // For TESTING ONLY (remove for production)
 // E.g., example photo: http://distillery.s3.amazonaws.com/media/2011/02/02/f9443f3443484c40b4792fa7c76214d5_7.jpg
-function testing_add_instagramRecord() {  
+function testing_add_instagram() {  
   // fake instagram record
-  var dataArray = JSON.parse('{"data": [{"caption": {"created_time": "1296703540","text": "#Snow","from": {"username": "emohatch","id": "1242695"},"id": "26589964"},"images": {"standard_resolution": {"url": "http://distilleryimage1.instagram.com/5fb063b2e1c911e1b44322000a1e8c9f_7.jpg","width": 612,"height": 612}},"id": "999999999"}]}').data;
+  var dataArray = JSON.parse('{"data": [{"caption": {"created_time": "1296703540","text": "#Snow","from": {"username": "emohatch","id": "1242695"},"id": "26589964"},"created_time": "1296703540", "images": {"standard_resolution": {"url": "http://distilleryimage1.instagram.com/5fb063b2e1c911e1b44322000a1e8c9f_7.jpg","width": 612,"height": 612}},"id": "261560384039219254_50900129"}]}').data;
 
   var newDataArray = [];
   _.each(dataArray, function(obj, idx){
@@ -184,12 +184,41 @@ function testing_add_instagramRecord() {
       else
         cap.text = '';
 
-      newDataArray.push({id : obj.id, images : images, caption : cap });
+      newDataArray.push({id : obj.id, images : images, caption : cap, created_time : obj.created_time });
   });
+  
   newData = { "data": newDataArray };
 
   // Let all the redis listeners know that we've got new media.
   redisClient.publish('channel:' + 'instagram', JSON.stringify(newData));
 }
-exports.testing_add_instagramRecord = testing_add_instagramRecord;
+exports.testing_add_instagram = testing_add_instagram;
 
+
+
+// For TESTING ONLY (remove for production)
+// E.g., example photo: http://distillery.s3.amazonaws.com/media/2011/02/02/f9443f3443484c40b4792fa7c76214d5_7.jpg
+function testing_add_tweet() {  
+  // fake instagram record
+  var dataArray = JSON.parse('{"data": [{"caption": {"created_time": "1296703540","text": "#Snow","from": {"username": "emohatch","id": "1242695"},"id": "26589964"},"created_time": "1296703540", "images": {"standard_resolution": {"url": "http://distilleryimage1.instagram.com/5fb063b2e1c911e1b44322000a1e8c9f_7.jpg","width": 612,"height": 612}},"id": "261560384039219254_50900129"}]}').data;
+
+  var newDataArray = [];
+  _.each(dataArray, function(obj, idx){
+      var images = {};
+      images.standard_resolution = obj.images.standard_resolution;
+
+      var cap = {};
+      if(!!obj.caption && !!obj.caption.text)
+        cap = obj.caption;
+      else
+        cap.text = '';
+
+      newDataArray.push({id : obj.id, images : images, caption : cap, created_time : obj.created_time });
+  });
+
+  newData = { "data": newDataArray };
+
+  // Let all the redis listeners know that we've got new media.
+  redisClient.publish('channel:' + 'instagram', JSON.stringify(newData));
+}
+exports.testing_add_tweet = testing_add_tweet;

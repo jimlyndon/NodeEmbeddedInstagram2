@@ -33,8 +33,13 @@ app.post('/callbacks/tag/', function(request, response){
 });
 
 // TESTING USE ONLY - used to add a test instagram record, e.g., http://localhost:3000/test/add/instagram/
-app.get('/test/add/instagram/', function(request, response){
-  helpers.testing_add_instagramRecord();
+app.get('/test/instagram/add', function(request, response){
+  helpers.testing_add_instagram();
+  response.send('OK');
+});
+
+app.get('/test/tweet/add/', function(request, response){
+  helpers.testing_add_tweet();
   response.send('OK');
 });
 
@@ -54,10 +59,10 @@ app.post('/instagrams/:id?', function(request, response) {
 
   helpers.getMedia(function(error, media) {
     
-    // for testing only
-    // if(media.length == 0) {
-    //   helpers.processInstagramUpdate({ object_id : 'nyfw' })
-    // }
+    // TODO: remove, for testing only
+    if(media.length == 0) {
+      helpers.processInstagramUpdate({ object_id : 'nyfw' })
+    }
     
     response.send(JSON.stringify(media));
   });
