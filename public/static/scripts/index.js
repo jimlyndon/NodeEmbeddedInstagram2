@@ -7,6 +7,28 @@ var viewModel = {
     }
 };
 
+ko.bindingHandlers.tweet = {
+    update: function(element, valueAccessor, allBindingsAccessor) {
+        // First get the latest data that we're bound to
+        var value = valueAccessor(), allBindings = allBindingsAccessor();
+
+        // Next, whether or not the supplied model property is observable, get its current value
+        var valueUnwrapped = ko.utils.unwrapObservable(value); 
+
+        $.each(valueUnwrapped, function(idx, oembed_id) {            
+            var oembed_url = 'https://api.twitter.com/1/statuses/oembed.json?align=center&id=' + oembed_id;
+            
+            $.ajax({
+              url: oembed_url,
+              dataType: "jsonp",
+              type: "GET"
+            }).done(function (resp, status, xhr) {
+                $(element).append("<div>" + resp.html + "</div>");
+            });
+        });
+    }
+};
+
 $(function () {
     ko.applyBindings(viewModel);
 });

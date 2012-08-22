@@ -73,7 +73,14 @@ app.post('/tweets/:id?', function(request, response) {
   // todo: use id to delimit the list of records to return
   var id = request.body.id;
   // todo: create helper function to get list of tweets 
-  response.send({});
+  response.send(JSON.stringify(['238076220334555136',
+'238075405632958465',
+'238075063629398017',
+'238074963033210880',
+'238074620211773440',
+'238074619372904448',
+'238074326501433345',
+'238074310797979649']));
 });
 
 // start application running on specified port
